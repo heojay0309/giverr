@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "171791209986",
+    "project_id": "giverr-301cc",
+    "storage_bucket": "giverr-301cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171791209986:android:f9b21f953c5f2fbb6c391b",
+        "android_client_info": {
+          "package_name": "com.app.giverr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEJUxJQppWHO2zrU0N8v0HkzqcE-K0am0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
