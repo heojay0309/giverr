@@ -1,40 +1,28 @@
-import { StyleSheet, View, Text, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { nameReq } from '@/constants/onBoarding';
 import UserInput from '@/components/auth/UserInput';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
-import auth from '@react-native-firebase/auth';
+import { useAuth } from '@/context/AuthContext';
+
 const NamePage = () => {
   const router = useRouter();
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState<any>('');
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    // Subscribe to user state changes
-    const unsubscribe = auth().onAuthStateChanged((user) => {
-      console.log('onAuthStateChanged Name:', user?.displayName);
-      if (user?.displayName) {
-        setIsLoading(false);
-        return router.push('/birthday');
-      } else {
-        setIsLoading(false);
-        // User is signed out, handle the logic here
-      }
-    });
-
-    // Return the unsubscribe function to be called on unmount
-    return unsubscribe;
-  }, [auth]);
+  const [pendingVerification, setPendingVerification] = useState(false);
+  const userData = useAuth();
 
   useEffect(() => {
     const didCompleted = async () => {
+      setIsLoading(true);
       try {
-        await auth().currentUser?.updateProfile({
-          displayName: userName,
-        });
-        setIsLoading(false);
+        userData.setUserName(userName);
+        setPendingVerification(true);
+        router.push('/birthday');
       } catch (error) {
         console.log('error with Name', error);
+      } finally {
+        setIsLoading(false);
       }
     };
     if (isLoading) {
@@ -46,9 +34,9 @@ const NamePage = () => {
     <SafeAreaView style={styles.container}>
       <UserInput
         page={nameReq}
-        name={'name'}
+        name={'namePage'}
         inputValue={userName}
-        valueChange={setUserName as (newValue: string) => void}
+        valueChange={setUserName}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />

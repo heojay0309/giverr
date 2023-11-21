@@ -1,12 +1,7 @@
-import { Link, Stack, useRouter } from 'expo-router';
-import {
-  Feather,
-  Entypo,
-  AntDesign,
-  Ionicons,
-  MaterialIcons,
-} from '@expo/vector-icons';
+import { Stack, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
+import { useAuth } from '@/context/AuthContext';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -31,27 +26,32 @@ export default function AuthLayoutNav() {
         name="intro"
         options={{
           headerShown: false,
+          animation: 'fade',
         }}
       />
       <Stack.Screen
         name="login"
         options={{
           animation: 'fade',
-          presentation: 'fullScreenModal',
+        }}
+      />
+      <Stack.Screen
+        name="verify"
+        options={{
+          animation: 'slide_from_right',
+          presentation: 'formSheet',
         }}
       />
       <Stack.Screen
         name="name"
         options={{
           animation: 'slide_from_right',
-          presentation: 'containedModal',
         }}
       />
       <Stack.Screen
         name="birthday"
         options={{
           animation: 'slide_from_right',
-          presentation: 'containedModal',
         }}
       />
     </Stack>

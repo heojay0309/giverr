@@ -5,35 +5,26 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import Animated, {
-  AnimatedRef,
   SharedValue,
   interpolateColor,
   useAnimatedStyle,
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
-import { OnboardingData } from '@/constants/data/data';
 import { Ionicons } from '@expo/vector-icons';
-// import { RootStackParamList } from '../../../navigator/RootNavigator';
 
 type Props = {
   dataLength: number;
   flatListIndex: SharedValue<number>;
-  flatListRef: AnimatedRef<FlatList<OnboardingData>>;
+  flatListRef: any;
   x: SharedValue<number>;
-};
-
-type RootStackParamList = {
-  login: undefined;
 };
 
 const CustomButton = ({ flatListRef, flatListIndex, dataLength, x }: Props) => {
   const { width: SCREEN_WIDTH } = useWindowDimensions();
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
+  const router = useRouter();
   const buttonAnimationStyle = useAnimatedStyle(() => {
     return {
       width:
@@ -95,7 +86,7 @@ const CustomButton = ({ flatListRef, flatListIndex, dataLength, x }: Props) => {
             index: flatListIndex.value + 1,
           });
         } else {
-          navigation.navigate('login');
+          router.push('/login');
         }
       }}
     >

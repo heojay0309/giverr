@@ -1,42 +1,34 @@
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
-import { birthdayReq } from '@/constants/onBoarding';
-import UserInput from '@/components/auth/UserInput';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'expo-router';
-import auth from '@react-native-firebase/auth';
-import { createUserProfile } from '../../utils/firestore/createUserProfile';
 
-type UserBirthday = {
-  month: string;
-  day: string;
-  year: string;
-};
+import UserInput from '@/components/auth/UserInput';
+import { useAuth } from '@/context/AuthContext';
+
+import { birthdayReq } from '@/constants/onBoarding';
 
 const BirthdayPage = () => {
-  const router = useRouter();
-  const [userBirthday, setUserBirthday] = useState<UserBirthday>({
+  const [userBirthday, setUserBirthday] = useState<any>({
     month: '',
     day: '',
     year: '',
   });
-
+  const [pendingVerification, setPendingVerification] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const userData = useAuth();
 
   useEffect(() => {
     const didCompleted = async () => {
+      setIsLoading(true);
       try {
-        console.log('userBirthday', userBirthday);
-        const saveUserBirthday = await createUserProfile({
-          birthday: `${userBirthday.year}-${userBirthday.month}-${userBirthday.day}`,
-        });
+        const usersBirthday = `${userBirthday.year}-${userBirthday.month}-${userBirthday.day}`;
+        userData.setUserBirthday(usersBirthday);
 
-        console.log('saved?', saveUserBirthday);
-
-        console.log('user', auth().currentUser);
+        setPendingVerification(true);
       } catch (error) {
         console.log('error with Name', error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
     if (isLoading) {
       didCompleted();
@@ -47,10 +39,10 @@ const BirthdayPage = () => {
     <SafeAreaView style={styles.container}>
       <UserInput
         page={birthdayReq}
-        name={'birthday'}
+        name={'birthdayPage'}
         isLoading={isLoading}
         inputValue={userBirthday}
-        valueChange={setUserBirthday as (newValue: UserBirthday) => void}
+        valueChange={setUserBirthday}
         setIsLoading={setIsLoading}
       />
     </SafeAreaView>

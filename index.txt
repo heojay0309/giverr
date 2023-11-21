@@ -1,0 +1,48 @@
+import { useState, useEffect } from 'react';
+import { useRouter, Slot } from 'expo-router';
+import { SafeAreaView, Text } from 'react-native';
+import { useAuth } from '@/context/AuthContext';
+
+const WelcomePage = () => {
+  const router = useRouter();
+  const { isLoading, isSignedIn, userBirthday, userName } = useAuth();
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (isSignedIn && userName && userBirthday) {
+        router.push('/home');
+      } else if (!userBirthday) {
+        router.push('/birthday');
+      } else if (!userName) {
+        router.push('/name');
+      } else if (!isSignedIn) {
+        router.push('/(auth)');
+      }
+    }
+  }, [isSignedIn, isLoading, userName, userBirthday]);
+
+  if (isLoading) {
+    return (
+      <SafeAreaView>
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  return router.push('/(auth)');
+};
+
+export default WelcomePage;
+// if (!initializing) {
+//   if (!user) {
+//     router.push('/(auth)/intro');
+//   } else {
+//     if (!userName) {
+//       router.push('/(auth)/name');
+//     } else if (userName && !userBirthday) {
+//       router.push('/(auth)/birthday');
+//     } else {
+//       router.push('/(tabs)/home');
+//     }
+//   }
+// }

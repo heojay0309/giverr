@@ -1,17 +1,20 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Redirect, useRouter } from 'expo-router';
 import auth from '@react-native-firebase/auth';
+import { useAuth } from '@/context/AuthContext';
 
 export default function AccountScreen() {
   const router = useRouter();
+  const authData = useAuth();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile Screen</Text>
       <Pressable
         onPress={async () => {
-          await auth().signOut();
-          router.replace('/');
+          // await auth().signOut();
+          // router.replace('/');
+          authData.signOut();
         }}
       >
         <Text>SIGN OUT</Text>

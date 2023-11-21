@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -5,28 +6,33 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from 'react-native';
-import { NameUserInput, BirthdayUserInput } from './inputs/index';
+import PhoneUserInput from './inputs/PhoneUserInput';
+import NameUserInput from './inputs/NameUserInput';
+import CodeUserInput from './inputs/CodeUserInput';
+import BirthdayUserInput from './inputs/BirthdayUserInput';
 import NextButton from './buttons/NextButton';
-import { useEffect, useState } from 'react';
+
+type PageType = 'phonePage' | 'verifyPage' | 'namePage' | 'birthdayPage';
+interface PageInfo {
+  pageTitle: string;
+  pageDescription: string;
+}
+
 type UserBirthday = {
   month: string;
   day: string;
   year: string;
 };
-type ValueChangeFunction =
-  | ((newValue: UserBirthday) => void)
-  | ((newValue: string) => void);
+type InputValue = string | UserBirthday;
+type ValueChangeFunction = (newValue: InputValue) => void;
 
 interface UserInputProps {
-  name: string;
-  page: {
-    pageTitle: string;
-    pageDescription: string;
-  };
+  name: PageType;
+  page: PageInfo;
   isLoading: boolean;
-  inputValue: string | UserBirthday;
+  inputValue: InputValue;
   valueChange: ValueChangeFunction;
-  setIsLoading: (e: boolean) => void;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserInput: React.FC<UserInputProps> = ({
@@ -38,10 +44,48 @@ const UserInput: React.FC<UserInputProps> = ({
   setIsLoading,
 }) => {
   const [toggle, setToggle] = useState(false);
-  const { pageTitle, pageDescription } = page;
 
   const handleClickConfirm = () => {
     setIsLoading(true);
+  };
+
+  const renderInputField = () => {
+    switch (name) {
+      case 'phonePage':
+        return (
+          <PhoneUserInput
+            setUserPhoneNumber={valueChange}
+            userPhoneNumber={inputValue as string}
+            setToggle={setToggle}
+          />
+        );
+      case 'verifyPage':
+        return (
+          <CodeUserInput
+            confirmationCode={inputValue as string}
+            setToggle={setToggle}
+            setConfirmationCode={valueChange}
+          />
+        );
+      case 'namePage':
+        return (
+          <NameUserInput
+            setUserName={valueChange}
+            userName={inputValue as string}
+            setToggle={setToggle}
+          />
+        );
+      case 'birthdayPage':
+        return (
+          <BirthdayUserInput
+            setUserBirthday={valueChange}
+            userBirthday={inputValue as UserBirthday}
+            setToggle={setToggle}
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -51,33 +95,10 @@ const UserInput: React.FC<UserInputProps> = ({
       <View style={styles.container}>
         <View>
           <View>
-            <Text style={styles.title}>{pageTitle}</Text>
-            <Text style={styles.description}>{pageDescription}</Text>
+            <Text style={styles.title}>{page.pageTitle}</Text>
+            <Text style={styles.description}>{page.pageDescription}</Text>
           </View>
-          <View style={styles.inputContainer}>
-            {name == 'name' && (
-              <NameUserInput
-                setUserName={valueChange as (newValue: string) => void}
-                userName={inputValue as string}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-                setToggle={setToggle}
-              />
-            )}
-            {name == 'birthday' && (
-              <BirthdayUserInput
-                setUserBirthday={
-                  valueChange as React.Dispatch<
-                    React.SetStateAction<UserBirthday>
-                  >
-                }
-                userBirthday={inputValue as UserBirthday}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-                setToggle={setToggle}
-              />
-            )}
-          </View>
+          <View style={styles.inputContainer}>{renderInputField()}</View>
         </View>
         <View style={styles.nextButtonContainer}>
           {toggle && (

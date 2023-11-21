@@ -7,13 +7,11 @@ type UserBirthday = {
   year: string;
 };
 
-interface UserBirthdayProps {
+type UserBirthdayProps = {
   userBirthday: UserBirthday;
-  isLoading: boolean;
   setToggle: (e: boolean) => void;
-  setUserBirthday: React.Dispatch<React.SetStateAction<UserBirthday>>;
-  setIsLoading: (e: boolean) => void;
-}
+  setUserBirthday: (newValue: UserBirthday) => void;
+};
 
 const BirthdayUserInput: React.FC<UserBirthdayProps> = ({
   userBirthday,
@@ -22,24 +20,27 @@ const BirthdayUserInput: React.FC<UserBirthdayProps> = ({
 }) => {
   // Handler functions to update each part of the birthday
   const handleMonthChange = (newMonth: string) => {
-    setUserBirthday((prevBirthday) => ({
-      ...prevBirthday,
+    const newBirthday = {
+      ...userBirthday,
       month: newMonth,
-    }));
+    };
+    setUserBirthday(newBirthday);
   };
 
   const handleDayChange = (newDay: string) => {
-    setUserBirthday((prevBirthday) => ({
-      ...prevBirthday,
+    const newBirthday = {
+      ...userBirthday,
       day: newDay,
-    }));
+    };
+    setUserBirthday(newBirthday);
   };
 
   const handleYearChange = (newYear: string) => {
-    setUserBirthday((prevBirthday) => ({
-      ...prevBirthday,
+    const newBirthday = {
+      ...userBirthday,
       year: newYear,
-    }));
+    };
+    setUserBirthday(newBirthday);
   };
   // Function to check if the month input is valid (i.e., between 1 and 12)
   const isMonthValid = () => {
@@ -118,11 +119,9 @@ const styles = StyleSheet.create({
   InputBubble: {
     borderWidth: 1,
     flex: 1,
-    // width: '100%',
     borderColor: 'gray',
     borderRadius: 10,
     textAlign: 'center',
-    // width: 60,
     height: 40,
     fontSize: 18,
     marginRight: 10,

@@ -6,9 +6,12 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs, useRouter } from 'expo-router';
+import { Text } from 'react-native';
 import Colors from '@/constants/Colors';
-
+import { useAuth } from '@/context/AuthContext';
+import auth from '@react-native-firebase/auth';
+import { useEffect } from 'react';
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
@@ -35,6 +38,26 @@ const TabBarIcon = (props: {
 };
 
 export default function TabLayout() {
+  const { isSignedIn, isLoading } = useAuth();
+  const router = useRouter();
+  const user = auth().currentUser;
+
+  // useEffect(() => {
+  //   if (!user?.displayName) {
+  //     router.push('/name');
+  //   }
+  // }, []);
+
+  // if (!isSignedIn) {
+  //   return router.replace('/');
+  // }
+  // if (isLoading) {
+  //   return <Text>Loading ...</Text>;
+  // }
+  // if (!isSignedIn) {
+  //   return <Redirect href="/intro" />;
+  // }
+
   return (
     <Tabs
       screenOptions={{
@@ -52,6 +75,7 @@ export default function TabLayout() {
             <TabBarIcon name="home" color={color} iconFamily={Feather} />
           ),
         }}
+        redirect={!isSignedIn}
       />
       <Tabs.Screen
         name="gift"
@@ -65,6 +89,7 @@ export default function TabLayout() {
             />
           ),
         }}
+        redirect={!isSignedIn}
       />
       <Tabs.Screen
         name="account"
@@ -78,6 +103,7 @@ export default function TabLayout() {
             />
           ),
         }}
+        redirect={!isSignedIn}
       />
     </Tabs>
   );

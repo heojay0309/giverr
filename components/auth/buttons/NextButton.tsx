@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 25, // Half of width and height to make it circular
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 10,
   },
 });
 

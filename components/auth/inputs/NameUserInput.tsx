@@ -3,9 +3,7 @@ import { StyleSheet, View, Text, TextInput } from 'react-native';
 type UserNameProps = {
   userName: string;
   setToggle: (e: boolean) => void;
-  isLoading: boolean;
   setUserName: (e: string) => void;
-  setIsLoading: (e: boolean) => void;
 };
 const NameUserInput = ({ userName, setUserName, setToggle }: UserNameProps) => {
   useEffect(() => {
@@ -19,7 +17,6 @@ const NameUserInput = ({ userName, setUserName, setToggle }: UserNameProps) => {
         style={styles.InputBubble}
         value={userName}
         onChangeText={setUserName}
-        keyboardType="default"
       />
     </View>
   );

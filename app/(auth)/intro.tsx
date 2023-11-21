@@ -1,28 +1,30 @@
-import { StyleSheet, View, ViewToken, FlatList } from 'react-native';
+import { StyleSheet, View, ViewToken } from 'react-native';
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
+
 import CustomButton from '@/components/auth/onBoarding/CustomButton';
 import IntroductionItem from '@/components/auth/onBoarding/IntroductionItem';
-import data, { OnboardingData } from '../../constants/data/data';
+import data from '@/constants/data/data';
 import Pagination from '@/components/auth/onBoarding/Pagination';
+import { useCallback } from 'react';
 
 const getStartedPage = () => {
   const flatListRef = useAnimatedRef<any>();
+
   const x = useSharedValue(0);
   const flatListIndex = useSharedValue(0);
 
-  const onViewableItemsChanged = ({
-    viewableItems,
-  }: {
-    viewableItems: ViewToken[];
-  }) => {
-    if (viewableItems[0].index !== null) {
-      flatListIndex.value = viewableItems[0].index;
-    }
-  };
+  const onViewableItemsChanged = useCallback(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      if (viewableItems[0].index !== null) {
+        flatListIndex.value = viewableItems[0].index;
+      }
+    },
+    []
+  );
 
   const onScroll = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -46,7 +48,6 @@ const getStartedPage = () => {
         bounces={false}
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged}
-        snapToAlignment="center" // Align items to the center
         viewabilityConfig={{
           minimumViewTime: 300,
           viewAreaCoveragePercentThreshold: 10,

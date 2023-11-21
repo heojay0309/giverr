@@ -3,54 +3,49 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 import { useRouter } from 'expo-router';
 import UserInput from '@/components/auth/UserInput';
 import auth from '@react-native-firebase/auth';
-import { authorizationReq } from '@/constants/onBoarding';
+import { verificationReq } from '@/constants/onBoarding';
 import { useAuth } from '@/context/AuthContext';
-
-export default function Login() {
+export default function Verify() {
   const router = useRouter();
   const authData = useAuth();
-  const [phoneNum, setPhoneNum] = useState<any>('');
   const [isLoading, setIsLoading] = useState(false);
   const [pendingVerification, setPendingVerification] = useState(false);
+  const [confirmationCode, setConfirmationCode] = useState<any>('');
 
   useEffect(() => {
-    if (authData.confirmationResult) {
+    if (auth().currentUser) {
       setIsLoading(false);
+      router.push('/name');
     }
   }, [pendingVerification]);
 
   useEffect(() => {
-    const handleSignIn = async () => {
+    const handleVerify = async () => {
       setIsLoading(true);
       try {
-        if (phoneNum) {
-          const sendCode = await auth().signInWithPhoneNumber(
-            '+1' + phoneNum,
-            true
-          );
-          authData.setConfirmationResult(sendCode);
-          router.push('/verify');
+        if (authData.confirmationResult && confirmationCode) {
+          await authData.confirmationResult.confirm(confirmationCode);
         }
-        setPendingVerification(true);
+        setPendingVerification(true); // Set flag to true upon successful verification
         setIsLoading(false);
       } catch (error) {
-        console.error('Error with Wrong PhoneNumber', error);
+        console.error('error', error);
       } finally {
         setIsLoading(false);
       }
     };
     if (isLoading) {
-      handleSignIn();
+      handleVerify();
     }
   }, [isLoading]);
 
   return (
     <SafeAreaView style={styles.container}>
       <UserInput
-        page={authorizationReq}
-        name="phonePage"
-        inputValue={phoneNum}
-        valueChange={setPhoneNum}
+        page={verificationReq}
+        name="verifyPage"
+        inputValue={confirmationCode}
+        valueChange={setConfirmationCode}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />

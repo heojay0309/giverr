@@ -10,7 +10,7 @@ type Props = {
 const Pagination = ({ data, x }: Props) => {
   return (
     <View style={styles.paginationContainer}>
-      {data.map((_, index) => {
+      {data.map((el, index) => {
         return <Dot key={index} index={index} x={x} />;
       })}
     </View>
