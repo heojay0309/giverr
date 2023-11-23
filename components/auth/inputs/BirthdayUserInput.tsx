@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { useState, useEffect } from 'react';
+import { XStack, YStack, ZStack } from 'tamagui';
 
 type UserBirthday = {
   month: string;
@@ -70,32 +71,34 @@ const BirthdayUserInput: React.FC<UserBirthdayProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.birthdayContainer}>
-        <TextInput
-          style={styles.InputBubble}
-          placeholder="MM"
-          maxLength={2}
-          value={userBirthday.month}
-          keyboardType="number-pad" // This ensures that only numbers can be entered
-          onChangeText={handleMonthChange}
-        />
-        <TextInput
-          style={styles.InputBubble}
-          placeholder="DD"
-          maxLength={2}
-          editable={userBirthday.month.length === 2 && isMonthValid()} // Day input is editable only if month is valid
-          value={userBirthday.day}
-          keyboardType="number-pad" // This ensures that only numbers can be entered
-          onChangeText={handleDayChange}
-        />
-        <TextInput
-          style={styles.InputBubble}
-          placeholder="YYYY"
-          maxLength={4}
-          value={userBirthday.year}
-          editable={userBirthday.day.length === 2 && isDayValid()} // Year input is editable only if day is valid
-          keyboardType="number-pad" // This ensures that only numbers can be entered
-          onChangeText={handleYearChange}
-        />
+        <XStack alignSelf="center" space>
+          <TextInput
+            style={styles.InputBubble}
+            placeholder="MM"
+            maxLength={2}
+            value={userBirthday.month}
+            keyboardType="number-pad" // This ensures that only numbers can be entered
+            onChangeText={handleMonthChange}
+          />
+          <TextInput
+            style={styles.InputBubble}
+            placeholder="DD"
+            maxLength={2}
+            editable={userBirthday.month.length === 2 && isMonthValid()} // Day input is editable only if month is valid
+            value={userBirthday.day}
+            keyboardType="number-pad" // This ensures that only numbers can be entered
+            onChangeText={handleDayChange}
+          />
+          <TextInput
+            style={styles.InputBubble}
+            placeholder="YYYY"
+            maxLength={4}
+            value={userBirthday.year}
+            editable={userBirthday.day.length === 2 && isDayValid()} // Year input is editable only if day is valid
+            keyboardType="number-pad" // This ensures that only numbers can be entered
+            onChangeText={handleYearChange}
+          />
+        </XStack>
       </View>
       <Text style={styles.text}>
         Your birthday may be shared with other users who have your number in
@@ -113,25 +116,24 @@ const styles = StyleSheet.create({
   birthdayContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    width: '100%',
-    padding: 20,
   },
   InputBubble: {
-    borderWidth: 1,
     flex: 1,
-    borderColor: 'gray',
     borderRadius: 10,
     textAlign: 'center',
-    height: 40,
+    height: 50,
     fontSize: 18,
     marginRight: 10,
+    fontFamily: 'Fredoka_400Regular',
     backgroundColor: 'white',
+    fontWeight: 'bold',
   },
   text: {
     fontSize: 12, // Sets the size of the font
     textAlign: 'center', // Centers the text
+    fontFamily: 'Fredoka_300Light',
     color: 'gray', // Sets the text color
-    padding: 20,
+    padding: 25,
   },
 });
 

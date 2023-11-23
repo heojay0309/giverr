@@ -9,6 +9,7 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function AuthLayoutNav() {
   const router = useRouter();
+
   return (
     <Stack
       screenOptions={{
@@ -38,20 +39,20 @@ export default function AuthLayoutNav() {
       <Stack.Screen
         name="verify"
         options={{
-          animation: 'slide_from_right',
-          presentation: 'formSheet',
+          animation: 'flip',
+          presentation: 'containedModal',
         }}
       />
       <Stack.Screen
         name="name"
         options={{
-          animation: 'slide_from_right',
+          animation: 'fade',
         }}
       />
       <Stack.Screen
         name="birthday"
         options={{
-          animation: 'slide_from_right',
+          animation: 'fade',
         }}
       />
     </Stack>

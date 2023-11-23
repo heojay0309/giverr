@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 35,
+    fontFamily: 'Fredoka_400Regular',
     fontWeight: '500',
   },
 });

@@ -89,10 +89,12 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 18,
     marginRight: 10,
+    fontFamily: 'Fredoka_400Regular',
     backgroundColor: 'white',
   },
   buttonText: {
     textAlign: 'center',
+    fontFamily: 'Fredoka_600SemiBold',
   },
 });
 

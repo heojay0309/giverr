@@ -126,11 +126,13 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 24,
+    fontFamily: 'Fredoka_600SemiBold',
     fontWeight: 'bold',
   },
   description: {
     textAlign: 'center',
     fontStyle: 'italic',
+    fontFamily: 'Fredoka_300Light',
     padding: 10,
     fontSize: 12,
   },

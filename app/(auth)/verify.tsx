@@ -5,6 +5,11 @@ import UserInput from '@/components/auth/UserInput';
 import auth from '@react-native-firebase/auth';
 import { verificationReq } from '@/constants/onBoarding';
 import { useAuth } from '@/context/AuthContext';
+import {
+  fetchUserData,
+  checkUserData,
+} from '@/utils/firestore/createUserProfile';
+
 export default function Verify() {
   const router = useRouter();
   const authData = useAuth();
@@ -13,7 +18,25 @@ export default function Verify() {
   const [confirmationCode, setConfirmationCode] = useState<any>('');
 
   useEffect(() => {
-    if (auth().currentUser) {
+    const currentUser = auth().currentUser;
+
+    const checkUserNameAndBirthday = async () => {
+      if (currentUser?.displayName && currentUser.uid) {
+        authData.setIsLoading(true);
+        const fetchedData = await fetchUserData(currentUser.uid);
+        const userDataChecked = await checkUserData(fetchedData);
+        if (userDataChecked) {
+          authData.setIsSignedIn(true);
+        }
+        authData.setIsLoading(false);
+      }
+    };
+
+    if (currentUser?.displayName) {
+      setIsLoading(false);
+      checkUserNameAndBirthday();
+    }
+    if (pendingVerification && auth().currentUser) {
       setIsLoading(false);
       router.push('/name');
     }

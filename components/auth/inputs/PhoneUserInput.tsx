@@ -63,14 +63,8 @@ const styles = StyleSheet.create({
     width: '75%',
     height: 50,
     fontSize: 18,
+    fontFamily: 'Fredoka_400Regular',
     backgroundColor: 'white',
-    // justifyContent: 'center',
-    // paddingLeft: 5,
-    // alignItems: 'center',
-    // flexDirection: 'column',
-    // paddingVertical: 8,
-    // fontWeight: '700',
-    // fontSize: 24,
   },
 });
 export default PhoneUserInput;

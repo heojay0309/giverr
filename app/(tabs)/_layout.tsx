@@ -11,7 +11,11 @@ import { Text } from 'react-native';
 import Colors from '@/constants/Colors';
 import { useAuth } from '@/context/AuthContext';
 import auth from '@react-native-firebase/auth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Gift, Home, CalendarDays } from '@tamagui/lucide-icons';
+import { Button } from 'tamagui';
+import { Calendar } from 'react-native-calendars';
+
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
@@ -38,33 +42,51 @@ const TabBarIcon = (props: {
 };
 
 export default function TabLayout() {
-  const { isSignedIn, isLoading } = useAuth();
-  const router = useRouter();
-  const user = auth().currentUser;
-
-  // useEffect(() => {
-  //   if (!user?.displayName) {
-  //     router.push('/name');
-  //   }
-  // }, []);
-
-  // if (!isSignedIn) {
-  //   return router.replace('/');
-  // }
-  // if (isLoading) {
-  //   return <Text>Loading ...</Text>;
-  // }
-  // if (!isSignedIn) {
-  //   return <Redirect href="/intro" />;
-  // }
-
+  const { isSignedIn } = useAuth();
+  const [showCalendar, setShowCalendar] = useState(false);
   return (
     <Tabs
       screenOptions={{
+        tabBarLabelStyle: { fontFamily: 'Fredoka_400Regular', fontSize: 11 },
         tabBarActiveTintColor: Colors['light'].tint,
+        tabBarItemStyle: { marginBottom: -3 },
         headerStyle: {
-          backgroundColor: Colors.light.background,
+          backgroundColor: 'transparent',
         },
+        headerTitle: '',
+        headerRight: () => (
+          <>
+            <Button
+              marginRight="$3"
+              shadowColor={'gray'}
+              backgroundColor="transparent"
+              pressStyle={{
+                backgroundColor: 'transparent',
+                borderColor: 'transparent',
+              }}
+              onPress={() => setShowCalendar(!showCalendar)}
+            >
+              <CalendarDays color="$colorTransparent" size={'$2.5'} />
+            </Button>
+            {showCalendar && (
+              <Calendar
+                style={{
+                  position: 'absolute',
+                  right: '20%',
+                  paddingHorizontal: 50,
+                  borderWidth: 1,
+                  minWidth: 350,
+                  minHeight: 345,
+                  backgroundColor: 'white',
+                  shadowOpacity: 40,
+                }}
+                onDayPress={(day) => {
+                  alert(day.dateString);
+                }}
+              />
+            )}
+          </>
+        ),
       }}
     >
       <Tabs.Screen
@@ -81,6 +103,7 @@ export default function TabLayout() {
         name="gift"
         options={{
           title: 'Gift',
+
           tabBarIcon: ({ color }) => (
             <TabBarIcon
               name="gift-outline"

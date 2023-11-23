@@ -5,7 +5,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-
+import { Spinner, Button } from 'tamagui';
+import { ChevronRight } from '@tamagui/lucide-icons';
 type NextButtonProps = {
   isLoading: boolean;
   onPress: (e: any) => void;
@@ -14,28 +15,25 @@ type NextButtonProps = {
 
 const NextButton: React.FC<NextButtonProps> = ({ isLoading, onPress }) => {
   return (
-    <TouchableOpacity
+    <Button
       style={styles.button}
       onPress={onPress}
       disabled={isLoading}
+      circular
+      size="$5"
     >
       {isLoading ? (
-        <ActivityIndicator size="small" color="#FFF" />
+        <Spinner size="small" color="white" />
       ) : (
-        <AntDesign name="rightcircle" size={30} color="#FFF" /> // Adjust icon name and size as needed
+        <ChevronRight size="$3" />
       )}
-    </TouchableOpacity>
+    </Button>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
     backgroundColor: 'green',
-    width: 50, // Adjust size as needed
-    height: 50, // Adjust size as needed
-    borderRadius: 25, // Half of width and height to make it circular
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: 10,
   },
 });

@@ -133,13 +133,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
           await createUserProfile({
             birthday: userBirthday,
           });
-          await signIn(auth().currentUser);
         }
         if (userName) {
           await auth().currentUser?.updateProfile({
             displayName: userName,
           });
         }
+        await signIn(auth().currentUser);
       } catch (error) {
         console.log('error with Name', error);
       } finally {
@@ -166,11 +166,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         }
         setIsLoading(false);
       }
-      // // const user = auth().currentUser;
-      // console.log('user', user);
-      // if (user && user.displayName) {
-      //   console.log('fetchedData', fetchedData);
-      // }
     } catch (error) {
       console.error('Error signing in', error);
       // Handle error
@@ -184,44 +179,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     unsubscribe();
   }, [auth]);
 
-  // // Subscribe to onAuthState: listen for signIn and signOut
-  // useEffect(() => {
-  //   const unsubscribe = auth().onAuthStateChanged((user) => {
-  //     setIsLoading(true);
-  //     // if (user) {
-  //     //   setIsLoading(false);
-  //     //   setIsSignedIn(true);
-  //     // } else {
-  //     // }
-  //     setIsSignedIn(user);
-
-  //     setIsLoading(false);
-  //   });
-  //   return unsubscribe();
-  // }, [auth]);
-
-  // const signIn = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const user = auth().currentUser;
-  //     console.log('user', user);
-  //     if (user && user.displayName) {
-  //       const fetchedData = await fetchUserData(user.uid);
-  //       const checkingData = await checkUserData(fetchedData);
-  //       console.log('fetchedData', fetchedData);
-  //       if (checkingData) {
-  //         setIsSignedIn(true);
-  //       } else {
-  //         setIsSignedIn(false);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error('Error signing in', error);
-  //     // Handle error
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
   // Subscribe to onAuthState: listen for signOut
   const signOut = async () => {
     try {

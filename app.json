@@ -17,6 +17,9 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.app.giverr",
+      "infoPlist": {
+        "NSContactsUsageDescription": "Allow $(PRODUCT_NAME) to access your contacts"
+      },
       "buildNumber": "0.0.1",
       "googleServicesFile": "./GoogleService-Info.plist"
     },
@@ -39,6 +42,12 @@
         {
           "origin": "https://acme.com",
           "asyncRoutes": "development"
+        }
+      ],
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow $(PRODUCT_NAME) to access your contacts."
         }
       ],
       "@react-native-firebase/app",

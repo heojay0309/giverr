@@ -1,20 +1,51 @@
 import { StyleSheet, View, Text } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import * as Contacts from 'expo-contacts';
+import GiftBox from '@/components/GiftBox';
+import { useEffect } from 'react';
+import { saveContactsToFirestore } from '@/utils/firestore/createUserProfile';
 
 export default function HomeScreen() {
-  console.log('auth at home', auth().currentUser);
+  useEffect(() => {
+    async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [
+            Contacts.Fields.Birthday,
+            Contacts.Fields.FirstName,
+            Contacts.Fields.LastName,
+            Contacts.Fields.PhoneNumbers,
+            Contacts.Fields.Image,
+          ],
+        });
+        await saveContactsToFirestore(data);
+      }
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Hello Home Screen</Text>
+      <GiftBox />
+      <Text style={styles.title}>HELLO</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    marginTop: 80,
+    paddingHorizontal: 20,
+    backgroundColor: 'inherit',
+    gap: 30,
+    display: 'flex',
+    justifyContent: 'space-between',
+    fontFamily: 'Fredoka_400Regular',
     alignItems: 'center',
-    justifyContent: 'center',
-    gap: 5,
+    flexDirection: 'column',
+  },
+  title: {
+    fontSize: 35,
+    fontFamily: 'Fredoka_400Regular',
+    fontWeight: '500',
   },
 });

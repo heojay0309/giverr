@@ -1,10 +1,20 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useFonts } from 'expo-font';
+// import { useFonts } from 'expo-font';
+import {
+  useFonts,
+  Fredoka_400Regular,
+  Fredoka_700Bold,
+  Fredoka_300Light,
+  Fredoka_600SemiBold,
+} from '@expo-google-fonts/fredoka';
 import { SplashScreen, useRouter, Slot, useSegments } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AuthProvider } from '@/context/AuthContext';
 import { useAuth } from '@/context/AuthContext';
+import config from '../tamagui.config';
+import { TamaguiProvider, Text, Theme } from 'tamagui';
+import auth from '@react-native-firebase/auth';
 // import * as SecureStore from 'expo-secure-store';
 
 // // Cache the Clerk JWT
@@ -41,6 +51,12 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    Fredoka_400Regular,
+    Fredoka_700Bold,
+    Fredoka_300Light,
+    Fredoka_600SemiBold,
+    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
+    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
     ...FontAwesome.font,
   });
 
@@ -57,7 +73,13 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AuthProvider>{loaded && <RootLayoutNav />}</AuthProvider>
+      <AuthProvider>
+        {loaded && (
+          <TamaguiProvider config={config}>
+            <RootLayoutNav />
+          </TamaguiProvider>
+        )}
+      </AuthProvider>
     </GestureHandlerRootView>
   );
 }

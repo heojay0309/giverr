@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     fontSize: 44,
     fontWeight: 'bold',
     marginBottom: 10,
+    fontFamily: 'Fredoka_700Bold',
     marginHorizontal: 20,
   },
   circleContainer: {
