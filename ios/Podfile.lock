@@ -628,6 +628,9 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - AppCheckCore (10.18.0):
+    - GoogleUtilities/Environment (~> 7.11)
+    - PromisesObjC (~> 2.3)
   - ASN1Decoder (1.9.0)
   - boost (1.76.0)
   - BoringSSL-GRPC (0.0.24):
@@ -645,14 +648,14 @@ PODS:
     - ExpoModulesCore
   - EXContacts (12.2.0):
     - ExpoModulesCore
-  - EXFileSystem (15.4.4):
+  - EXFileSystem (15.4.5):
     - ExpoModulesCore
   - EXFont (11.4.0):
     - ExpoModulesCore
   - EXJSONUtils (0.7.1)
   - EXManifests (0.7.2):
     - ExpoModulesCore
-  - Expo (49.0.18):
+  - Expo (49.0.21):
     - ExpoModulesCore
   - expo-dev-client (2.4.12):
     - EXManifests
@@ -711,11 +714,11 @@ PODS:
     - React-Core
   - ExpoBlur (12.4.1):
     - ExpoModulesCore
-  - ExpoHead (0.0.18):
+  - ExpoHead (0.0.20):
     - ExpoModulesCore
   - ExpoKeepAwake (12.3.0):
     - ExpoModulesCore
-  - ExpoModulesCore (1.5.11):
+  - ExpoModulesCore (1.5.12):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-NativeModulesApple
@@ -751,39 +754,40 @@ PODS:
     - React-Core (= 0.72.6)
     - React-jsi (= 0.72.6)
     - ReactCommon/turbomodule/core (= 0.72.6)
-  - Firebase/AppCheck (10.17.0):
+  - Firebase/AppCheck (10.18.0):
     - Firebase/CoreOnly
-    - FirebaseAppCheck (~> 10.17.0)
-  - Firebase/Auth (10.17.0):
+    - FirebaseAppCheck (~> 10.18.0)
+  - Firebase/Auth (10.18.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 10.17.0)
-  - Firebase/CoreOnly (10.17.0):
-    - FirebaseCore (= 10.17.0)
-  - Firebase/Firestore (10.17.0):
+    - FirebaseAuth (~> 10.18.0)
+  - Firebase/CoreOnly (10.18.0):
+    - FirebaseCore (= 10.18.0)
+  - Firebase/Firestore (10.18.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 10.17.0)
-  - FirebaseAppCheck (10.17.0):
+    - FirebaseFirestore (~> 10.18.0)
+  - FirebaseAppCheck (10.18.0):
+    - AppCheckCore (~> 10.18)
     - FirebaseAppCheckInterop (~> 10.17)
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - PromisesObjC (~> 2.1)
   - FirebaseAppCheckInterop (10.18.0)
-  - FirebaseAuth (10.17.0):
+  - FirebaseAuth (10.18.0):
     - FirebaseAppCheckInterop (~> 10.17)
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
     - RecaptchaInterop (~> 100.0)
-  - FirebaseCore (10.17.0):
+  - FirebaseCore (10.18.0):
     - FirebaseCoreInternal (~> 10.0)
-    - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/Logger (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
   - FirebaseCoreExtension (10.18.0):
     - FirebaseCore (~> 10.0)
   - FirebaseCoreInternal (10.18.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseFirestore (10.17.0):
+  - FirebaseFirestore (10.18.0):
     - FirebaseCore (~> 10.0)
     - FirebaseCoreExtension (~> 10.0)
     - FirebaseFirestoreInternal (~> 10.17)
@@ -881,7 +885,7 @@ PODS:
     - BoringSSL-GRPC (= 0.0.24)
     - gRPC-Core/Interface (= 1.49.1)
   - gRPC-Core/Interface (1.49.1)
-  - GTMSessionFetcher/Core (3.1.1)
+  - GTMSessionFetcher/Core (3.2.0)
   - hermes-engine (0.72.6):
     - hermes-engine/Pre-built (= 0.72.6)
   - hermes-engine/Pre-built (0.72.6)
@@ -1317,19 +1321,19 @@ PODS:
     - React-logger (= 0.72.6)
     - React-perflogger (= 0.72.6)
   - RecaptchaInterop (100.0.0)
-  - RNFBApp (18.6.1):
-    - Firebase/CoreOnly (= 10.17.0)
+  - RNFBApp (18.6.2):
+    - Firebase/CoreOnly (= 10.18.0)
     - React-Core
-  - RNFBAppCheck (18.6.1):
-    - Firebase/AppCheck (= 10.17.0)
-    - React-Core
-    - RNFBApp
-  - RNFBAuth (18.6.1):
-    - Firebase/Auth (= 10.17.0)
+  - RNFBAppCheck (18.6.2):
+    - Firebase/AppCheck (= 10.18.0)
     - React-Core
     - RNFBApp
-  - RNFBFirestore (18.6.1):
-    - Firebase/Firestore (= 10.17.0)
+  - RNFBAuth (18.6.2):
+    - Firebase/Auth (= 10.18.0)
+    - React-Core
+    - RNFBApp
+  - RNFBFirestore (18.6.2):
+    - Firebase/Firestore (= 10.18.0)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - React-Core
     - RNFBApp
@@ -1453,6 +1457,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - AppCheckCore
     - ASN1Decoder
     - BoringSSL-GRPC
     - Firebase
@@ -1632,6 +1637,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
+  AppCheckCore: 4687c03428947d5b26a6bf9bb5566b39f5473bf1
   ASN1Decoder: 4f4bbcaf1d1b8be56daa3280e82863a607f5bda9
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
@@ -1640,19 +1646,19 @@ SPEC CHECKSUMS:
   EXApplication: 042aa2e3f05258a16962ea1a9914bf288db9c9a1
   EXConstants: ce5bbea779da8031ac818c36bea41b10e14d04e1
   EXContacts: 9e8626eefc90c428af3d61a9e2869ac413d2569b
-  EXFileSystem: 2b826a3bf1071a4b80a8457e97124783d1ac860e
+  EXFileSystem: f8b838a880254de42a5a7da20ed5ce12e2697c1b
   EXFont: 738c44c390953ebcbab075a4848bfbef025fd9ee
   EXJSONUtils: 6802be4282d42b97c51682468ddc1026a06f8276
   EXManifests: cf66451b11b2c2f6464917528d792759f7fd6ce0
-  Expo: f446f9811b9dfc0abc05a1613966c8475bc6795e
+  Expo: 61a8e1aa94311557c137c0a4dfd4fe78281cfbb4
   expo-dev-client: 1e20e0d67534fd63da37604747a60e7d69fc46f5
   expo-dev-launcher: 4abaa5997c1063e77432bb23ca05da364803e297
   expo-dev-menu: 7cc0b6c9ed9fc99740e5d3ba1335bcd1537da9e8
   expo-dev-menu-interface: bda969497e73dadc2663c479e0fa726ca79a306e
   ExpoBlur: a2c90bdfa4ff9f459cdb0f83191bddf020e3e2db
-  ExpoHead: 95d9749a4f3a90d654ad1f3011df3496a8cada7e
+  ExpoHead: ac95331e2a45cb94f6aee8ba6b8cb3d0a2cc6817
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
-  ExpoModulesCore: 81037d28453615c4206a6a2ca7556a0f364a0a0a
+  ExpoModulesCore: e5b041c20cee64b4f2d8c49b0bcdd757d152109f
   ExpoSecureStore: 5372610a4bbcf5e50fafbe6f38f8d9c22edf8253
   ExpoSystemUI: fa4854e3226e87f86d3383570264c6e4e90bc782
   ExpoWebBrowser: 2c788f9c07718a780fe6d8bf2f6195c47609faaa
@@ -1662,14 +1668,14 @@ SPEC CHECKSUMS:
   EXUpdatesInterface: 82ed48d417cdcd376c12ca1c2ce390d35500bed6
   FBLazyVector: 748c0ef74f2bf4b36cfcccf37916806940a64c32
   FBReactNativeSpec: 966f29e4e697de53a3b366355e8f57375c856ad9
-  Firebase: f4ac0b02927af9253ae094d23deecf0890da7374
-  FirebaseAppCheck: 1a23917453ebe60f87ae8d55ca80fae29cd5335e
+  Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
+  FirebaseAppCheck: f34226df40cf6057dc54916ab5a5d461bb51ee68
   FirebaseAppCheckInterop: 3cd914842ba46f4304050874cd284de82f154ffd
-  FirebaseAuth: 8d285d9f6e39cc8e23be53a4edd83a923ea629d8
-  FirebaseCore: 534544dd98cabcf4bf8598d88ec683b02319a528
+  FirebaseAuth: 12314b438fa76048540c8fb86d6cfc9e08595176
+  FirebaseCore: 2322423314d92f946219c8791674d2f3345b598f
   FirebaseCoreExtension: 62b201498aa10535801cdf3448c7f4db5e24ed80
   FirebaseCoreInternal: 8eb002e564b533bdcf1ba011f33f2b5c10e2ed4a
-  FirebaseFirestore: 67e8c2dc613a86f056cc0037569f2aaee7dbf5fe
+  FirebaseFirestore: 171bcbb57a1a348dd171a0d5e382c03ef85a77bb
   FirebaseFirestoreInternal: 3d5d03f2447caae64311d2cda92abbf4ec5241be
   FirebaseSharedSwift: 62e248642c0582324d0390706cadd314687c116b
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
@@ -1677,7 +1683,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   "gRPC-C++": 2df8cba576898bdacd29f0266d5236fa0e26ba6a
   gRPC-Core: a21a60aefc08c68c247b439a9ef97174b0c54f96
-  GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
+  GTMSessionFetcher: 41b9ef0b4c08a6db4b7eb51a21ae5183ec99a2c8
   hermes-engine: 8057e75cfc1437b178ac86c8654b24e7fead7f60
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
@@ -1721,10 +1727,10 @@ SPEC CHECKSUMS:
   React-utils: 1dc03e6e55f56388b6fdde3768a66c885bacb627
   ReactCommon: cfe086d2e2ec9f2907c66666c856082608fba822
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  RNFBApp: 5a16a735bad57ca29ee44757bde7e654c5bc8f60
-  RNFBAppCheck: 0ea5ceccc0f435b3f2313de7dc22b061ad5b68ef
-  RNFBAuth: afec283a83131aef9ea13e51dc32e157ad57d455
-  RNFBFirestore: 7fdfb27c8292e75886817178524ef2c256985f49
+  RNFBApp: 5a4df14a5094dab69fc29049be3cf54af07b0435
+  RNFBAppCheck: abfc7878972acf31feb9636ad9f585c42086f3d2
+  RNFBAuth: 9682f1015678515f5d3d6ee005a9978905a25810
+  RNFBFirestore: deda76d7a90e7519484b591c2d564ce751be3593
   RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
   RNReanimated: 9f7068e43b9358a46a688d94a5a3adb258139457
   RNScreens: 50ffe2fa2342eabb2d0afbe19f7c1af286bc7fb3

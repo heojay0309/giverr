@@ -12,7 +12,7 @@ const data: OnboardingData[] = [
   {
     id: 1,
     animation: require('../../assets/animations/LottieGift.json'),
-    text: 'GIVEE(Brrrr)R',
+    text: 'GIV(Brrrr)R',
     textColor: '#FFEB3B',
     backgroundColor: '#C3B1E1',
   },

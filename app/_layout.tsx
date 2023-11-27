@@ -1,5 +1,4 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-// import { useFonts } from 'expo-font';
 import {
   useFonts,
   Fredoka_400Regular,
@@ -55,8 +54,6 @@ export default function RootLayout() {
     Fredoka_700Bold,
     Fredoka_300Light,
     Fredoka_600SemiBold,
-    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
-    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
     ...FontAwesome.font,
   });
 
@@ -72,15 +69,11 @@ export default function RootLayout() {
   }, [loaded]);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <AuthProvider>
-        {loaded && (
-          <TamaguiProvider config={config}>
-            <RootLayoutNav />
-          </TamaguiProvider>
-        )}
-      </AuthProvider>
-    </GestureHandlerRootView>
+    <TamaguiProvider config={config}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <AuthProvider>{loaded && <RootLayoutNav />}</AuthProvider>
+      </GestureHandlerRootView>
+    </TamaguiProvider>
   );
 }
 

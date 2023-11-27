@@ -6,7 +6,7 @@ import { saveContactsToFirestore } from '@/utils/firestore/createUserProfile';
 
 export default function HomeScreen() {
   useEffect(() => {
-    async () => {
+    const getContacts = async () => {
       const { status } = await Contacts.requestPermissionsAsync();
       if (status === 'granted') {
         const { data } = await Contacts.getContactsAsync({
@@ -21,6 +21,7 @@ export default function HomeScreen() {
         await saveContactsToFirestore(data);
       }
     };
+    getContacts();
   }, []);
 
   return (

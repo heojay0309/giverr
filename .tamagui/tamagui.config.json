@@ -47596,7 +47596,7 @@
     },
     "unset": {},
     "settings": {
-      "webContainerType": "size"
+      "webContainerType": "inline-size"
     },
     "inverseShorthands": {
       "userSelect": "ussel",
